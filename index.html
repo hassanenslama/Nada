@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Nada's Cosmic Love ♥️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Adagescript+Regular&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+:root {
+    --main-color: #3D0000; /* لون مارون غامق */
+    --accent-color: #FF4D6D;
+    --text-color: #FFF;
+    --star-color: #FF99AC;
+    --heart-glow: #FF1A40;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    font-family: 'Adagescript Regular', cursive;
+    background: var(--main-color);
+    color: var(--text-color);
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+/* خلفية النجوم المتحركة */
+.starry-background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, var(--main-color) 20%, #000 100%);
+    z-index: -1;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--star-color);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--star-color);
+    animation: twinkle 2s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* بوابة القلب النجمي */
+.heart-gateway {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    animation: pulseHeart 3s infinite;
+}
+
+@keyframes pulseHeart {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.heart-border {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 3px solid var(--accent-color);
+    clip-path: path("M12 4.419c-2.826-5.695-11.999-4.064-11.999 3.27 0 7.27 9.86 12.54 11.999 15.58 2.134-3.04 12-8.31 12-15.58 0-7.327-9.17-8.972-12-3.27z");
+    box-shadow: 0 0 50px var(--heart-glow);
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    0% { box-shadow: 0 0 50px var(--heart-glow); }
+    100% { box-shadow: 0 0 100px var(--heart-glow); }
+}
+
+/* محتوى الدخول */
+.password-container {
+    position: relative;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    border-radius: 20px;
+    max-width: 90%;
+    margin: auto;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 2px solid var(--accent-color);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(1deg); }
+    50% { transform: translateY(-20px) rotate(-1deg); }
+}
+
+.magic-input {
+    font-size: 1.2em;
+    padding: 15px 30px;
+    border-radius: 50px;
+    border: 2px solid var(--accent-color);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    margin: 20px;
+    width: 80%;
+    transition: all 0.3s;
+}
+
+.magic-input:focus {
+    outline: none;
+    box-shadow: 0 0 30px var(--accent-color);
+}
+
+.magic-btn {
+    background: var(--accent-color);
+    color: var(--main-color);
+    padding: 12px 35px;
+    border-radius: 50px;
+    border: none;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px var(--accent-color);
+}
+
+.magic-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px var(--accent-color);
+}
+
+.error-message {
+    color: var(--accent-color);
+    margin: 15px;
+    min-height: 20px;
+}
+
+/* صفحة العد التنازلي */
+#countdownPage {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#countdownNumber {
+    font-size: 10em;
+    color: var(--accent-color);
+    text-shadow: 0 0 50px var(--heart-glow);
+    animation: pulse 2s infinite;
+    position: relative;
+}
+
+#countdownNumber::before, #countdownNumber::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    animation: floatBalloon 3s infinite ease-in-out;
+}
+
+#countdownNumber::before {
+    top: -50px;
+    left: -50px;
+}
+
+#countdownNumber::after {
+    bottom: -50px;
+    right: -50px;
+}
+
+@keyframes floatBalloon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* صفحة الشهادة */
+#certificatePage {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.certificate-box {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 40px;
+    border-radius: 20px;
+    border: 2px solid var(--accent-color);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    animation: float 6s ease-in-out infinite;
+    width: 90%;
+    max-width: 800px;
+    font-size: 1.2em;
+}
+
+.certificate-box h2 {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    font-size: 2em;
+}
+
+.certificate-box p {
+    margin: 10px 0;
+    font-size: 1.2em;
+}
+
+.certificate-box img {
+    width: 100px;
+    height: auto;
+    margin: 20px auto;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.certificate-box img.enlarged {
+    width: 100%;
+    max-width: 400px;
+}
+
+/* صفحة المتحف */
+#museumPage {
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.museum-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.museum-item {
+    border: 2px solid var(--accent-color);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s;
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height: calc(100vw * 1.68);
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.museum-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.museum-item p {
+    margin-top: 10px;
+    color: var(--text-color);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.museum-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px var(--accent-color);
+}
+
+/* صفحة قصة النجم Kochab */
+#starStoryPage {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px; /* إضافة padding لتجنب التصاق النصوص بالحواف */
+    overflow-y: auto; /* إمكانية التمرير إذا كان المحتوى طويلًا */
+}
+
+.story-box {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px; /* تقليل الـ padding للهواتف */
+    border-radius: 20px;
+    border: 2px solid var(--accent-color);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    animation: float 6s ease-in-out infinite;
+    width: 90%; /* جعل العرض يتناسب مع الشاشة */
+    max-width: 800px; /* أقصى عرض للشاشات الكبيرة */
+    font-size: 1em; /* حجم خط أصغر للهواتف */
+}
+
+.story-box h2 {
+    color: var(--accent-color);
+    margin-bottom: 15px; /* تقليل المسافة */
+    font-size: 1.5em; /* حجم خط أصغر للهواتف */
+}
+
+.story-box p {
+    margin: 10px 0;
+    font-size: 0.9em; /* حجم خط أصغر للهواتف */
+    line-height: 1.5; /* تحسين تباعد الأسطر */
+}
+
+/* استعلامات وسائط للهواتف */
+@media (max-width: 768px) {
+    .story-box {
+        padding: 15px; /* تقليل الـ padding أكثر للهواتف */
+    }
+
+    .story-box h2 {
+        font-size: 1.2em; /* حجم خط أصغر للهواتف الصغيرة */
+    }
+
+    .story-box p {
+        font-size: 0.8em; /* حجم خط أصغر للهواتف الصغيرة */
+    }
+}
+
+@media (max-width: 480px) {
+    .story-box {
+        padding: 10px; /* تقليل الـ padding أكثر للهواتف الصغيرة */
+    }
+
+    .story-box h2 {
+        font-size: 1em; /* حجم خط أصغر للهواتف الصغيرة */
+    }
+
+    .story-box p {
+        font-size: 0.7em; /* حجم خط أصغر للهواتف الصغيرة */
+    }
+}
+
+/* العد التنازلي في المتحف */
+.museum-timer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid var(--accent-color);
+    font-size: 1.2em;
+}
+
+/* زرار الرجوع */
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: var(--accent-color);
+    color: var(--main-color);
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px var(--accent-color);
+}
+
+.back-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px var(--accent-color);
+}
+
+/* أيقونة الانتقال لإحداثيات النجم */
+.star-coordinates-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: var(--accent-color);
+    color: var(--main-color);
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px var(--accent-color);
+}
+
+.star-coordinates-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px var(--accent-color);
+}
+
+/* زرار إظهار/إخفاء الباسورد */
+.toggle-password-btn {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+/* كلمة "بحبك" التفاعلية */
+.love-text {
+    position: absolute;
+    font-size: 5em;
+    color: var(--accent-color);
+    text-shadow: 0 0 20px var(--heart-glow);
+    animation: floatLove 10s infinite ease-in-out;
+    display: none;
+}
+
+@keyframes floatLove {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+}
+
+/* نافذة إدخال باسورد المتحف */
+.museum-password-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 20px;
+    border: 2px solid var(--accent-color);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    z-index: 1000;
+    display: none;
+    width: 90%;
+    max-width: 400px;
+}
+
+.museum-password-container input {
+    font-size: 1em;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 2px solid var(--accent-color);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    margin: 15px 0;
+    width: 100%;
+}
+
+.museum-password-container button {
+    background: var(--accent-color);
+    color: var(--main-color);
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.museum-password-container button:hover {
+    transform: scale(1.05);
+}
+
+.museum-password-error {
+    color: var(--accent-color);
+    margin-top: 10px;
+    display: none;
+}
+
+/* تحسين التصميم ليكون متجاوبًا */
+@media (max-width: 768px) {
+    .heart-gateway {
+        width: 200px;
+        height: 200px;
+    }
+
+    .password-container {
+        padding: 20px;
+    }
+
+    .magic-input {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+
+    .magic-btn {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    #countdownNumber {
+        font-size: 5em;
+    }
+
+    .certificate-box {
+        padding: 20px;
+    }
+
+    .certificate-box h2 {
+        font-size: 1.5em;
+    }
+
+    .certificate-box p {
+        font-size: 1em;
+    }
+
+    .museum-item {
+        height: 80vh;
+    }
+
+    .museum-item p {
+        font-size: 1.2em;
+    }
+
+    .certificate-box img {
+        width: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .heart-gateway {
+        width: 150px;
+        height: 150px;
+    }
+
+    .password-container {
+        padding: 15px;
+    }
+
+    .magic-input {
+        font-size: 0.9em;
+        padding: 8px 15px;
+    }
+
+    .magic-btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    #countdownNumber {
+        font-size: 3em;
+    }
+
+    .certificate-box {
+        padding: 15px;
+    }
+
+    .certificate-box h2 {
+        font-size: 1.2em;
+    }
+
+    .certificate-box p {
+        font-size: 0.9em;
+    }
+
+    .museum-item {
+        height: 70vh;
+    }
+
+    .museum-item p {
+        font-size: 1em;
+    }
+
+    .certificate-box img {
+        width: 60px;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- خلفية النجوم المتحركة -->
+    <div class="starry-background" id="starContainer"></div>
+
+    <!-- بوابة القلب النجمي -->
+    <div class="heart-gateway">
+        <div class="heart-border"></div>
+    </div>
+
+    <!-- صفحة الدخول -->
+    <div id="passwordPage" class="page">
+        <div class="password-container">
+            <h2>♥️ كلمه سر سهله بس محتاجه تفكير</h2>
+            <div style="position: relative;">
+                <input type="password" class="magic-input" placeholder="🗓️ خمني كلمه السر" id="passwordInput">
+                <button class="toggle-password-btn" onclick="togglePassword()">👁️</button>
+            </div>
+            <button class="magic-btn" onclick="checkPassword()">✨يافتحي قلبي</button>
+            <p class="error-message" id="errorMsg"></p>
+            <div id="codeSection" style="display: none;">
+                <input type="text" class="magic-input" placeholder="💌 كلمه بحبها بطريقه معينه" id="codeInput">
+                <button class="magic-btn" onclick="checkCode()">🔓 تأكيد</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- صفحة العد التنازلي -->
+    <div id="countdownPage" class="page">
+        <h1 id="countdownNumber"></h1>
+        <p id="romanticMessage" style="font-size: 2em; color: var(--accent-color); text-shadow: 0 0 20px var(--heart-glow);"></p>
+    </div>
+
+    <!-- صفحة الشهادة -->
+    <div id="certificatePage" class="page">
+        <div class="certificate-box">
+            <h2>📜 شهادة ملكية نجمية</h2>
+            <p>تم تغيير اسم النجم "كوكب(نجم الشمال القديم)" إلى اسم "Nada Amean"</p>
+            <p>الإحداثيات: 14ʰ 50ᵐ 42.3ˢ +74° 09′ 19.7″</p>
+            <p>تاريخ التغيير: 15/1/2024</p>
+            <button class="magic-btn" onclick="showMuseum()">🏛️ متحف ذكرياتنا</button>
+            <button class="magic-btn" onclick="showStarStory()">🌟 قصة النجم</button>
+        </div>
+    </div>
+
+    <!-- صفحة المتحف -->
+    <div id="museumPage" class="page">
+        <div class="museum-grid" id="museumGrid">
+            <!-- الصور من 1 إلى 8 -->
+            <div class="museum-item">
+                <p>أنتِ كل أحلامي 💘</p>
+                <img src="memories/1.jpg" alt="ذكرياتنا 1">
+            </div>
+            <div class="museum-item">
+                <p>عيونكِ نجمة هدايتي 🌟</p>
+                <img src="memories/2.jpg" alt="ذكرياتنا 2">
+            </div>
+            <div class="museum-item">
+                <p>قلبي لا يعرف سواكِ ❤️</p>
+                <img src="memories/3.jpg" alt="ذكرياتنا 3">
+            </div>
+            <div class="museum-item">
+                <p>أنتِ أجمل من كل النجوم 🌹</p>
+                <img src="memories/4.jpg" alt="ذكرياتنا 4">
+            </div>
+            <div class="museum-item">
+                <p>حبكِ ينير عالمي ✨</p>
+                <img src="memories/5.jpg" alt="ذكرياتنا 5">
+            </div>
+            <div class="museum-item">
+                <p>أنتِ سر سعادتي 🌷</p>
+                <img src="memories/6.jpg" alt="ذكرياتنا 6">
+            </div>
+            <div class="museum-item">
+                <p>كل يوم معكِ هو عيد 🎉</p>
+                <img src="memories/7.jpg" alt="ذكرياتنا 7">
+            </div>
+            <div class="museum-item">
+                <p>أنتِ القمر الذي يضيء ليالي 🌙</p>
+                <img src="memories/8.jpg" alt="ذكرياتنا 8">
+            </div>
+        </div>
+        <div class="museum-timer" id="museumTimer"></div>
+        <button class="star-coordinates-btn" onclick="openStarCoordinates()">📍 إحداثيات النجم</button>
+        <button class="back-btn" onclick="goBackToCertificate()">🔙 رجوع</button>
+    </div>
+
+<div id="starStoryPage" class="page">
+    <div class="story-box">
+        <h2>🌟 قصة النجم Kochab</h2>
+        <p>
+            النجم Kochab (كوكب) هو أحد ألمع النجوم في كوكبة الدب الأصغر (Ursa Minor). 
+            يعتبر هذا النجم جزءًا من مجموعة النجوم التي تشكل "ذيل الدب الأصغر"، 
+            وهو قريب من النجم القطبي (Polaris)، مما يجعله مهمًا في الملاحة الفلكية.
+        </p>
+        <p>
+            <strong>تاريخ النجم:</strong>
+            يعود تاريخ اكتشاف النجم Kochab إلى العصور القديمة، حيث كان يستخدم 
+            كمرجع للملاحة في البحار والصحاري. كان يعتبر نجمًا مهمًا في الثقافات 
+            العربية والفارسية، حيث كان يُستخدم لتحديد الاتجاهات.
+        </p>
+        <p>
+            <strong>معلومات علمية:</strong>
+            - الاسم: Kochab (كوكب)  
+            - الكوكبة: الدب الأصغر (Ursa Minor)  
+            - القدر الظاهري: 2.08 (واحد من ألمع النجوم في السماء)  
+            - البعد عن الأرض: حوالي 130.9 سنة ضوئية  
+            - النوع: عملاق برتقالي (Orange Giant)  
+        </p>
+        <p>
+            <strong>قصة النجم:</strong>
+            في الثقافات القديمة، كان النجم Kochab يُعتبر رمزًا للثبات والاستقرار 
+            بسبب قربه من النجم القطبي. كان البحارة يعتمدون عليه لتحديد الاتجاهات 
+            أثناء رحلاتهم الليلية. اليوم، لا يزال هذا النجم يحظى باهتمام علماء الفلك 
+            بسبب موقعه المميز في السماء.
+        </p>
+        <button class="back-btn" onclick="goBackToCertificate()">🔙 رجوع</button>
+    </div>
+</div>
+
+    <!-- كلمة "بحبك" التفاعلية -->
+    <div class="love-text" id="loveText">بحبك يا ندى</div>
+
+    <!-- نافذة إدخال باسورد المتحف -->
+    <div class="museum-password-container" id="museumPasswordContainer">
+        <h3>🔐 أدخل تاريخ خاص</h3>
+        <input type="text" id="museumPasswordInput" placeholder="🗓️ أدخل التاريخ">
+        <button onclick="checkMuseumPassword()">✨ افتح المتحف</button>
+        <p class="museum-password-error" id="museumPasswordError"></p>
+    </div>
+
+    <!-- أصوات -->
+    <audio id="clickSound" src="click.mp3"></audio>
+    <audio id="countdownSound" src="countdown.mp3"></audio>
+
+    <!-- الجافا سكربت -->
+    <script>
+        // إنشاء النجوم العشوائية
+        function createStars() {
+            const container = document.getElementById('starContainer');
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDelay = `${Math.random() * 2}s`;
+                container.appendChild(star);
+            }
+        }
+
+        // نظام الباسورد
+        let attempts = 0;
+        let passwordLocked = false;
+
+        function checkPassword() {
+            if (passwordLocked) return;
+
+            const input = document.getElementById('passwordInput').value;
+            attempts++;
+
+            if(input === "30/11/2024") {
+                startCountdown();
+                return;
+            }
+
+            showError();
+        }
+
+        function showError() {
+            const messages = [
+                "😘 باقي محاولتين.. أنا واثق فيكِ!",
+                "💔 محاولة أخيرة.. اتصللي لو مش عارفة",
+                "🔐 الكود السري: تارييييخ سهل"
+            ];
+            
+            document.getElementById('errorMsg').textContent = 
+                attempts < 3 ? messages[attempts-1] : messages[2];
+            
+            if(attempts === 3) {
+                passwordLocked = true;
+                document.getElementById('passwordInput').disabled = true;
+                document.getElementById('codeSection').style.display = 'block';
+                anime({
+                    targets: '#codeSection',
+                    scale: [0.8, 1],
+                    opacity: [0, 1],
+                    duration: 1000
+                });
+            }
+
+            // تأثيرات عند الخطأ
+            anime({
+                targets: '.heart-gateway',
+                scale: [1, 1.2],
+                duration: 500,
+                easing: 'easeInOutExpo',
+                direction: 'alternate'
+            });
+        }
+
+        function checkCode() {
+            if(document.getElementById('codeInput').value === "بحبك يا حسن") {
+                attempts = 0;
+                passwordLocked = false;
+                document.getElementById('passwordInput').disabled = false;
+                document.getElementById('codeSection').style.display = 'none';
+                document.getElementById('errorMsg').textContent = "🎉 صح يا حبيبتي، حاولي تاني!";
+            } else {
+                document.getElementById('errorMsg').textContent = "💔 غلط.. لكن بحبك بردو";
+            }
+        }
+
+        // إظهار/إخفاء الباسورد
+        function togglePassword() {
+            const input = document.getElementById('passwordInput');
+            input.type = input.type === 'password' ? 'text' : 'password';
+        }
+
+        // العد التنازلي
+        function startCountdown() {
+            document.getElementById('passwordPage').style.display = 'none';
+            document.getElementById('countdownPage').style.display = 'flex';
+            let count = 15;
+            
+            const countdown = setInterval(() => {
+                document.getElementById('countdownNumber').textContent = count;
+                document.getElementById('romanticMessage').textContent = 
+                    romanticMessages[15 - count];
+                
+                // تشغيل صوت العد التنازلي
+                const countdownSound = document.getElementById('countdownSound');
+                countdownSound.play();
+
+                if(count-- <= 0) {
+                    clearInterval(countdown);
+                    showCertificate();
+                }
+            }, 3000); // 3 ثواني بين كل عدّة
+        }
+
+        const romanticMessages = [
+            "أنتِ كل أحلامي 💘",
+            "عيونكِ نجمة هدايتي 🌟",
+            "قلبي لا يعرف سواكِ ❤️",
+            "أنتِ أجمل من كل النجوم 🌹",
+            "حبكِ ينير عالمي ✨",
+            "أنتِ سر سعادتي 🌷",
+            "كل يوم معكِ هو عيد 🎉",
+            "أنتِ القمر الذي يضيء ليالي 🌙",
+            "حبكِ هو أجمل شعور 🌈",
+            "أنتِ كل ما أتمناه 🌟",
+            "أنتِ الحب الذي طالما حلمت به 💖",
+            "أنتِ النور الذي يضيء حياتي 🌞",
+            "أنتِ كل شيء جميل في حياتي 🌸",
+            "أنتِ الحب الذي لا ينتهي 💕",
+            "أنتِ كل ما أريد في هذه الحياة 🌹"
+        ];
+
+        // صفحة الشهادة
+        function showCertificate() {
+            document.getElementById('countdownPage').style.display = 'none';
+            document.getElementById('certificatePage').style.display = 'flex';
+        }
+
+        // نظام باسورد المتحف
+        function showMuseum() {
+            document.getElementById('museumPasswordContainer').style.display = 'block';
+        }
+
+        function checkMuseumPassword() {
+            const input = document.getElementById('museumPasswordInput').value;
+            if(input === "15/1/2025") {
+                document.getElementById('museumPasswordContainer').style.display = 'none';
+                document.getElementById('certificatePage').style.display = 'none';
+                document.getElementById('starStoryPage').style.display = 'none';
+                document.getElementById('museumPage').style.display = 'flex';
+                loadMuseumPhotos();
+                startMuseumTimer();
+            } else {
+                document.getElementById('museumPasswordError').style.display = 'block';
+                document.getElementById('museumPasswordError').textContent = "❌ التاريخ غير صحيح";
+                anime({
+                    targets: '#museumPasswordContainer',
+                    translateX: [-10, 10, -10, 10, 0],
+                    duration: 500,
+                    easing: 'easeInOutSine'
+                });
+            }
+        }
+
+        // تعديل عرض المتحف
+        function loadMuseumPhotos() {
+            const grid = document.getElementById('museumGrid');
+            grid.innerHTML = '';
+            const romanticMessages = [
+                "اول صوره لينا سوا تقريبا 💘",
+                "نظره مباشره لعيون اجمل بنت في الدنيا 🌟",
+                "عنيكي دي ولا بحر بيغرقني؟ ❤️",
+                "بنوتي الي مستبيه في حضني 🌹",
+                "ينهار كيتته 😂",
+                "شكلي وحش بس انتي محلياني 🌷",
+                "الصوره الاقرب لقلبي ❤️",
+                "مخصماك وابعد عني انا مش طيقااك 😂",
+            ];
+
+            for(let i = 1; i <= 8; i++) {
+                const item = document.createElement('div');
+                item.className = 'museum-item';
+                item.innerHTML = `
+                    <p>${romanticMessages[i - 1]}</p>
+                    <img src="memories/${i}.jpg" alt="ذكرياتنا">
+                `;
+                grid.appendChild(item);
+            }
+        }
+
+        // العد التنازلي في المتحف
+        function startMuseumTimer() {
+            const targetDate = new Date('2025-01-15T13:02:00');
+            const timerElement = document.getElementById('museumTimer');
+
+            const updateTimer = () => {
+                const now = new Date();
+                const diff = now - targetDate;
+
+                if (diff > 0) {
+                    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+                    timerElement.textContent = `🕒 ${days} أيام ${hours} ساعات ${minutes} دقائق ${seconds} ثواني`;
+                } else {
+                    timerElement.textContent = "🎉 لقد وصلنا إلى التاريخ المحدد!";
+                }
+            };
+
+            setInterval(updateTimer, 1000);
+            updateTimer();
+        }
+
+        // زرار الرجوع
+        function goBack() {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.style.display = 'none');
+            document.getElementById('passwordPage').style.display = 'block';
+        }
+
+        // أيقونة الانتقال لإحداثيات النجم
+        function openStarCoordinates() {
+            // إحداثيات النجم "كوكب"
+            const ra = "14h50m42.3s"; // Right Ascension (مطلع مستقيم)
+            const dec = "+74°09′19.7″"; // Declination (الميل)
+            
+            // رابط موقع Stellarium Web مع الإحداثيات
+            const stellariumUrl = `https://stellarium-web.org/?ra=${encodeURIComponent(ra)}&dec=${encodeURIComponent(dec)}&fov=0.5`;
+            
+            // فتح الرابط في نافذة جديدة
+            window.open(stellariumUrl, '_blank');
+        }
+
+        // كلمة "بحبك" التفاعلية
+        function showLoveText() {
+            const loveText = document.getElementById('loveText');
+            loveText.style.display = 'block';
+            loveText.style.left = `${Math.random() * 80 + 10}%`;
+            loveText.style.top = `${Math.random() * 80 + 10}%`;
+            anime({
+                targets: '#loveText',
+                scale: [0.5, 1],
+                opacity: [0, 1],
+                duration: 1000,
+                easing: 'easeInOutExpo'
+            });
+            setTimeout(() => {
+                loveText.style.display = 'none';
+            }, 3000);
+        }
+
+        // زر الرجوع من قصة النجم إلى الشهادة
+        function goBackToCertificate() {
+            document.getElementById('starStoryPage').style.display = 'none';
+            document.getElementById('certificatePage').style.display = 'flex';
+        }
+
+        // عرض صفحة قصة النجم
+function showStarStory() {
+    document.getElementById('certificatePage').style.display = 'none';
+    document.getElementById('museumPage').style.display = 'none';
+    document.getElementById('starStoryPage').style.display = 'flex'; // إظهار صفحة القصة
+}
+
+        // تشغيل صوت عند النقر على الأزرار
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', () => {
+                const clickSound = document.getElementById('clickSound');
+                clickSound.play();
+            });
+        });
+
+        setInterval(showLoveText, 60000); // كل دقيقة
+
+        // تهيئة الموقع
+        createStars();
+    </script>
+</body>
+</html>
